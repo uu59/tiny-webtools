@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://uu59.github.io/tiny-webtools/google-news-feed/</loc>
+  </url>
+  
+  <url>
+    <loc>https://uu59.github.io/tiny-webtools/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uu59.github.io/tiny-webtools/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uu59.github.io/tiny-webtools/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
