@@ -39,3 +39,8 @@ jobs:
             git config user.name "circleci"
             git commit -m "publish: $CIRCLE_SHA1"
             git push -f origin HEAD:gh-pages
+
+general:
+  branches:
+    only:
+     - master
