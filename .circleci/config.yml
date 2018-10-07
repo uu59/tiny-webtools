@@ -1,0 +1,41 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # choosed by it's small and having `curl`:
+      # - https://hub.docker.com/r/circleci/golang/tags/
+      # - https://circleci.com/docs/2.0/circleci-images/#pre-installed-tools
+      - image: circleci/golang:latest
+    steps:
+      - checkout
+      - restore_cache:
+          key: hugo-bin
+      - run:
+          command: |
+            if [ -x ./bin/hugo ]; then
+              exit 0
+            fi
+            mkdir -p ./bin
+            curl -fsL https://github.com/gohugoio/hugo/releases/download/v0.49/hugo_0.49_Linux-64bit.tar.gz | tar xzvf -
+            mv hugo ./bin
+      - save_cache:
+          key: hugo-bin
+          paths:
+            - ./bin/hugo
+      - run:
+          name: Prepare public/ as submodule
+          command: |
+            git clone -b gh-pages --single-branch git@github.com:uu59/tiny-webtools.git public
+      - run:
+          name: Build
+          command: |
+            ./bin/hugo
+      - run:
+          name: Push gh-pages branch
+          command: |
+            cd public
+            git add -A
+            git config user.email "circleci_${CIRCLE_SHA1}@example.com"
+            git config user.name "circleci"
+            git commit -m "publish: $CIRCLE_SHA1"
+            git push -f origin HEAD:gh-pages
