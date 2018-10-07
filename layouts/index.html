@@ -6,6 +6,7 @@
   <link href="{{ .Site.BaseURL }}/index.css" media="screen" rel="stylesheet" type="text/css" />
 </head> 
 <body>
+  <h1>{{ .Site.Title }}</h1>
 
   <ul>
   {{ range .Site.AllPages }}
@@ -16,4 +17,6 @@
     {{ end }}
   {{ end }}
   </ul>
+
+  {{ .Render "footer" }}
 </body></html> 
