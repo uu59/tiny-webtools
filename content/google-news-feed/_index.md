@@ -42,7 +42,6 @@ layout: single
 
   f.onsubmit = (ev) => {
     ev.preventDefault()
-    console.dir(ev.target)
     const params = {}
     for(let el of ev.target.elements) {
       switch(el.name) {
