@@ -1,0 +1,15 @@
+<!DOCTYPE html> 
+<html>
+<head> 
+  <meta charset="utf-8" />
+  <title>{{ .Site.Title }} - {{ .Title }}</title>
+  <link href="{{ .Site.BaseURL }}/index.css" media="screen" rel="stylesheet" type="text/css" />
+</head> 
+<body>
+  <a class="linkto-index" href="{{ .Site.BaseURL }}">{{ .Site.Title }} Index</a>
+
+  <h1>{{ .Title }}</h1>
+
+  {{ .Content }}
+
+</body></html> 
