@@ -37,7 +37,7 @@ jobs:
             git add -A
             git config user.email "circleci_${CIRCLE_SHA1}@example.com"
             git config user.name "circleci"
-            git commit --allow-empty -m "publish: $CIRCLE_SHA1"
+            git commit --allow-empty -m "publish: $CIRCLE_SHA1 [ci skip]"
             git push -f origin HEAD:gh-pages
 
 general:
