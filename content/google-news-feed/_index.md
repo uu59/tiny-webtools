@@ -97,12 +97,15 @@ async function fetchContentPreview(url, q) {
   const parser = new DOMParser()
   const doc = parser.parseFromString(feed, "application/xml")
 
+  const a = document.createElement('a')
   let html = "<ol>"
   for(let item of doc.querySelectorAll('item')) {
     let url = item.querySelector('link').textContent;
+    a.href = url
+    let domain = a.hostname
     let title = item.querySelector('title').textContent;
     let timestamp = new Date(item.querySelector('pubDate').textContent);
-    html += `<li>${timestamp.toLocaleString()}<br><a href="${url}">${title}</a></li>`
+    html += `<li style="margin-bottom:1em">${timestamp.toLocaleString()} | ${domain}<br><a href="${url}">${title}</a></li>`
   }
   html += '</ol>'
   resultItems.innerHTML = html
