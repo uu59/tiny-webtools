@@ -2,3 +2,12 @@
   display: block;
   margin: 1em 0;
 }
+address {
+  border-top: #d0d0d0 1px solid;
+  padding-top: 2em;
+  margin-top: 2em;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 480px) {
+
+}

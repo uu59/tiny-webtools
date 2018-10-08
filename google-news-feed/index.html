@@ -47,6 +47,7 @@
   <p>
     <a id="result"></a>
   </p>
+  <div id="result-items"></div>
 </form>
 
 <script>
@@ -86,10 +87,39 @@
           break;
       }
     }
+    if(!params.q) return;
+
     const url = `https://news.google.com/news/rss/headlines/section/q/${params.q}/?ned=${params.ned}&hl=${params.hl}&gl=${params.gl}`
     result.href = url;
     result.textContent = url;
+
+    fetchContentPreview(url, decodeURIComponent(params.q))
   }
+
+async function fetchContentPreview(url, q) {
+  const resultItems = document.querySelector('#result-items')
+  resultItems.innerHTML = `Loading preview for '${q}'..`
+
+  const proxy = "https://cors-anywhere.herokuapp.com/"
+  const response = await fetch(`${proxy}${url}`, {
+    headers: {
+      "x-requested-with": "xhr"
+    }
+  })
+  const feed = await response.text()
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(feed, "application/xml")
+
+  let html = "<ol>"
+  for(let item of doc.querySelectorAll('item')) {
+    let url = item.querySelector('link').textContent;
+    let title = item.querySelector('title').textContent;
+    let timestamp = new Date(item.querySelector('pubDate').textContent);
+    html += `<li>${timestamp.toLocaleString()}<br><a href="${url}">${title}</a></li>`
+  }
+  html += '</ol>'
+  resultItems.innerHTML = html
+}
 </script>
 
 
