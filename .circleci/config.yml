@@ -33,11 +33,12 @@ jobs:
       - run:
           name: Push gh-pages branch
           command: |
+            commitinfo="$(git log -1 --format='%h %s')"
             cd public
             git add -A
-            git config user.email "circleci_${CIRCLE_SHA1}@example.com"
+            git config user.email "circleci@example.com"
             git config user.name "circleci"
-            git commit --allow-empty -m "publish: $CIRCLE_SHA1 [ci skip]"
+            git commit --allow-empty -m "publish ${commitinfo} [ci skip]"
             git push -f origin HEAD:gh-pages
 
 general:
